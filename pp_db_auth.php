@@ -46,9 +46,9 @@ function pp_db_auth_init() {
 	add_site_option('pp_db_enc',"");
 	add_site_option('pp_db_other_enc',"");
 	add_site_option('pp_db_error_msg',"");
-	add_site_option('pp_db_role_bool','');
-	add_site_option('pp_db_role','');
-	add_site_option('pp_db_role_value','');
+//	add_site_option('pp_db_role_bool','');
+//	add_site_option('pp_db_role','');
+//	add_site_option('pp_db_role_value','');
 	add_site_option('pp_db_site_url','');
 }
 
@@ -81,9 +81,9 @@ function pp_db_auth_display_options() {
 		update_site_option('pp_db_enc', $_POST['pp_db_enc']);
 		update_site_option('pp_db_other_enc', $_POST['pp_db_other_enc']);
 		update_site_option('pp_db_error_msg', $_POST['pp_db_error_msg']);
-		update_site_option('pp_db_role_bool', $_POST['pp_db_role_bool']);
-		update_site_option('pp_db_role', $_POST['pp_db_role']);
-		update_site_option('pp_db_role_value', $_POST['pp_db_role_value']);
+//		update_site_option('pp_db_role_bool', $_POST['pp_db_role_bool']);
+//		update_site_option('pp_db_role', $_POST['pp_db_role']);
+//		update_site_option('pp_db_role_value', $_POST['pp_db_role_value']);
 		update_site_option('pp_db_site_url', $_POST['pp_db_site_url']);
 	}
 
@@ -291,15 +291,16 @@ function pp_db_auth_check_login($username,$password) {
 	}
    
 	//Set the mapping of fields from the external db to the wordpress db
-	$sqlfields['first_name'] = get_option('pp_db_first_name');
-	$sqlfields['last_name'] = get_option('pp_db_last_name');
-	$sqlfields['user_url'] = get_option('pp_db_user_url');
-	$sqlfields['user_email'] = get_option('pp_db_user_email');
-	$sqlfields['description'] = get_option('pp_db_description');
-	$sqlfields['aim'] = get_option('pp_db_aim');
-	$sqlfields['yim'] = get_option('pp_db_yim');
-	$sqlfields['jabber'] = get_option('pp_db_jabber');        
-	$sqlfields['pp_db_role'] = get_option('pp_db_role');
+	$sqlfields = array();
+	$sqlfields['first_name'] = get_site_option('pp_db_first_name');
+	$sqlfields['last_name'] = get_site_option('pp_db_last_name');
+	$sqlfields['user_url'] = get_site_option('pp_db_user_url');
+	$sqlfields['user_email'] = get_site_option('pp_db_user_email');
+	$sqlfields['description'] = get_site_option('pp_db_description');
+	$sqlfields['aim'] = get_site_option('pp_db_aim');
+	$sqlfields['yim'] = get_site_option('pp_db_yim');
+	$sqlfields['jabber'] = get_site_option('pp_db_jabber');        
+	$sqlfields['pp_db_role'] = get_site_option('pp_db_role');
    
    //Insert or update the user in wordpress
 	$wordpressUser = array();
@@ -321,7 +322,7 @@ function pp_db_auth_check_login($username,$password) {
 	if (empty($wordpressUser['display_name'])) {
 		$wordpressUser['display_name'] = $username;
 	}
-		
+	
 	if ($id = username_exists($username)) {
 		//If user is already in wordpress, update
 		$wordpressUser['ID'] = $id;
