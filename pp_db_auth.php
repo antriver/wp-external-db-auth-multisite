@@ -125,13 +125,13 @@ function pp_db_auth_display_options() {
                 	<option <?php if ($encType == 'MD5') { echo 'selected="selected"'; }?>>MD5</option>
                 	<option <?php if ($encType == 'Custom') { echo 'selected="selected"'; }?>>Custom</option>
 				</select></td>
-			<td><span class="description"><strong style="color:red;"><?php _e( 'required' ); ?></strong>; <?php _e( 'using "Other" requires you to enter PHP code below!)' ); ?></td>            
+			<td><span class="description"><strong style="color:red;"><?php _e( 'required' ); ?></strong> <?php _e( '(Selecting "Other" requires you to enter PHP code below!)' ); ?></td>            
         </tr>
         <tr valign="top">
             <th scope="row"><label><?php _e( 'Custom password checking code' ); ?></label></th>
 				<td><textarea type="text" name="pp_db_other_enc" cols="50" rows="5"><?php echo get_site_option('pp_db_other_enc'); ?></textarea>
 				<td><span class="description"><?php _e( 'The PHP code you write here will be used if you pick "Other" as the password encryption method. In this code, return true or false if the user\'s password is correct. You are given the variables $dbPassword which is the stored password, and $username and $password which is what the user entered. Note: this only runs if the username exists in the database. If not, it will exit before it gets to this code.<br/>e.g. if the password was cleartext:<br/>
-return $dbPassword == $password;' ); ?></td>
+return $password == $dbPassword;' ); ?></td>
     	</tr>
     	<? /*
     	//Not implemented
