@@ -1,6 +1,7 @@
 <?php
 /*
 	Plugin Name: Wordpress Multisite External Database Authentication
+	Plugin URI: https://github.com/antriver/wp-external-db-auth-multisite
 	Description: Used to externally authenticate WP users with an existing user database. Uses PDO for database connections and support custom hashing functions.
 	Version: 2.0
 	Author: Anthony Kuske
@@ -59,6 +60,10 @@ function pp_db_auth_add_menu() {
 //actual configuration screen
 function pp_db_auth_display_options() { 
 
+	foreach ($_POST as $key => &$value) {
+		$value = stripslashes($value);
+	}
+
 	//Save changes
 	if (!empty($_POST)) {
 		update_site_option('pp_db_pdo_string', $_POST['pp_db_pdo_string']);
@@ -74,7 +79,7 @@ function pp_db_auth_display_options() {
 		update_site_option('pp_db_yim', $_POST['pp_db_yim']);
 		update_site_option('pp_db_jabber', $_POST['pp_db_jabber']);
 		update_site_option('pp_db_enc', $_POST['pp_db_enc']);
-		update_site_option('pp_db_other_enc', stripslashes($_POST['pp_db_other_enc']));
+		update_site_option('pp_db_other_enc', $_POST['pp_db_other_enc']);
 		update_site_option('pp_db_error_msg', $_POST['pp_db_error_msg']);
 		update_site_option('pp_db_role_bool', $_POST['pp_db_role_bool']);
 		update_site_option('pp_db_role', $_POST['pp_db_role']);
