@@ -1,4 +1,4 @@
-=== Multisite External Database Authentication 2014 ===
+=== Wordpress Multisite External Database Authentication ===
 
 A fork of the "External Database Authentication Reloaded" Wordpress plugin.
 Designed for use with Wordpress Multisite Networks. Plugin settings are 
