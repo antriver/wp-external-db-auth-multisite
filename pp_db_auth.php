@@ -3,11 +3,12 @@
 	Plugin Name: Wordpress Multisite External Database Authentication
 	Description: Used to externally authenticate WP users with an existing user database. Uses PDO for database connections and support custom hashing functions.
 	Version: 2.0
-	Author: Anthony Kuske <www.anthonykuske.com>
+	Author: Anthony Kuske
+	Author URI: http://www.anthonykuske.com
 		
 	Based on original plugin: External Database Authentication Reloaded by Joshua Parker
 	Original Plugin URI: http://www.7mediaws.org/extend/plugins/external-db-auth-reloaded/
-	Author URI: http://www.joshparker.us/
+	Original Author URI: http://www.joshparker.us/
 	Original Author: Charlene Barina
 	Original Author URI: http://www.ploofle.com
 
