@@ -5,6 +5,9 @@ Designed for use with Wordpress Multisite Networks. Plugin settings are
 stored once and used for every site in the network.
 Improved database connections by using PDO. The PEAR MDB2 package is no longer needed.
 
+To install:
+cd wp-content/plugins
+git clone https://github.com/antriver/wp-external-db-auth-multisite
 
 Original plugin (settings have probably changed since below)...
 
