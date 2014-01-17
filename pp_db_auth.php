@@ -1,6 +1,6 @@
 <?php
 /*
-	Plugin Name: External Database Authentication 2014
+	Plugin Name: Multisite External Database Authentication 2014
 	Description: Used to externally authenticate WP users with an existing user database.
 		Uses PDO for database connections and support custom hashing functions.
 	Version: 2.0
