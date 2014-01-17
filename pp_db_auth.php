@@ -1,13 +1,16 @@
 <?php
 /*
-Plugin Name: External Database Authentication Reloaded
-Plugin URI: http://www.7mediaws.org/extend/plugins/external-db-auth-reloaded/
-Description: Used to externally authenticate WP users with an existing user DB.
-Version: 1.1
-Author: Joshua Parker
-Author URI: http://www.joshparker.us/
-Original Author: Charlene Barina
-Original Author URI: http://www.ploofle.com
+	Plugin Name: External Database Authentication 2014
+	Description: Used to externally authenticate WP users with an existing user database.
+		Uses PDO for database connections and support custom hashing functions.
+	Version: 2.0
+	Author: Anthony Kuske <www.anthonykuske.com>
+		
+	Based on original plugin: External Database Authentication Reloaded by Joshua Parker
+	Original Plugin URI: http://www.7mediaws.org/extend/plugins/external-db-auth-reloaded/
+	Author URI: http://www.joshparker.us/
+	Original Author: Charlene Barina
+	Original Author URI: http://www.ploofle.com
 
     Copyright 2007  Charlene Barina  (email : cbarina@u.washington.edu)
 
@@ -48,7 +51,7 @@ function pp_db_auth_init() {
 	add_site_option('pp_db_site_url','');
 }
 
-//page for config menu
+//Add page for network admin menu
 function pp_db_auth_add_menu() {
 	add_submenu_page('settings.php', "External DB settings", "External DB settings", 'manage_options', 'pp_db_auth_settings', "pp_db_auth_display_options");
 }
@@ -56,29 +59,30 @@ function pp_db_auth_add_menu() {
 //actual configuration screen
 function pp_db_auth_display_options() { 
 
-if (!empty($_POST)) {
-	update_site_option('pp_db_pdo_string', $_POST['pp_db_pdo_string']);
-	update_site_option('pp_db_table', $_POST['pp_db_table']);
-	update_site_option('pp_db_namefield', $_POST['pp_db_namefield']);
-	update_site_option('pp_db_pwfield', $_POST['pp_db_pwfield']);
-	update_site_option('pp_db_first_name', $_POST['pp_db_first_name']);
-	update_site_option('pp_db_last_name', $_POST['pp_db_last_name']);
-	update_site_option('pp_db_user_url', $_POST['pp_db_user_url']);
-	update_site_option('pp_db_user_email', $_POST['pp_db_user_email']);
-	update_site_option('pp_db_description', $_POST['pp_db_description']);
-	update_site_option('pp_db_aim', $_POST['pp_db_aim']);
-	update_site_option('pp_db_yim', $_POST['pp_db_yim']);
-	update_site_option('pp_db_jabber', $_POST['pp_db_jabber']);
-	update_site_option('pp_db_enc', $_POST['pp_db_enc']);
-	update_site_option('pp_db_other_enc', stripslashes($_POST['pp_db_other_enc']));
-	update_site_option('pp_db_error_msg', $_POST['pp_db_error_msg']);
-	update_site_option('pp_db_role_bool', $_POST['pp_db_role_bool']);
-	update_site_option('pp_db_role', $_POST['pp_db_role']);
-	update_site_option('pp_db_role_value', $_POST['pp_db_role_value']);
-	update_site_option('pp_db_site_url', $_POST['pp_db_site_url']);
-}
+	//Save changes
+	if (!empty($_POST)) {
+		update_site_option('pp_db_pdo_string', $_POST['pp_db_pdo_string']);
+		update_site_option('pp_db_table', $_POST['pp_db_table']);
+		update_site_option('pp_db_namefield', $_POST['pp_db_namefield']);
+		update_site_option('pp_db_pwfield', $_POST['pp_db_pwfield']);
+		update_site_option('pp_db_first_name', $_POST['pp_db_first_name']);
+		update_site_option('pp_db_last_name', $_POST['pp_db_last_name']);
+		update_site_option('pp_db_user_url', $_POST['pp_db_user_url']);
+		update_site_option('pp_db_user_email', $_POST['pp_db_user_email']);
+		update_site_option('pp_db_description', $_POST['pp_db_description']);
+		update_site_option('pp_db_aim', $_POST['pp_db_aim']);
+		update_site_option('pp_db_yim', $_POST['pp_db_yim']);
+		update_site_option('pp_db_jabber', $_POST['pp_db_jabber']);
+		update_site_option('pp_db_enc', $_POST['pp_db_enc']);
+		update_site_option('pp_db_other_enc', stripslashes($_POST['pp_db_other_enc']));
+		update_site_option('pp_db_error_msg', $_POST['pp_db_error_msg']);
+		update_site_option('pp_db_role_bool', $_POST['pp_db_role_bool']);
+		update_site_option('pp_db_role', $_POST['pp_db_role']);
+		update_site_option('pp_db_role_value', $_POST['pp_db_role_value']);
+		update_site_option('pp_db_site_url', $_POST['pp_db_site_url']);
+	}
 
-?>
+	?>
 	<div class="wrap">
 	<h2><?php _e( 'External Database Authentication Settings' ); ?></h2>        
 	<form method="post" action="settings.php?page=pp_db_auth_settings">
@@ -129,6 +133,8 @@ if (!empty($_POST)) {
 				<td><span class="description"><?php _e( 'Only will run if "Other" is selected and needs to be PHP code. In this code, return true or false if the user\'s password is correct. You are given the variables $dbPassword which is the stored password, and $username and $password which is what the user entered. Note: this only runs if the username exists in the database. If not, it will exit before it gets to this code.<br/>e.g. if the password was cleartext:<br/>
 return $dbPassword == $password;' ); ?></td>
     	</tr>
+    	<? /*
+    	//Not implemented
 		<tr valign="top">
             <th scope="row"><label><?php _e( 'Role check' ); ?></label></th>
 			<td><input type="text" name="pp_db_role" value="<?php echo get_site_option('pp_db_role'); ?>" />
@@ -153,7 +159,7 @@ return $dbPassword == $password;' ); ?></td>
 				</select><br />
 				<input type="text" name="pp_db_role_value" value="<?php echo get_site_option('pp_db_role_value'); ?>" /></td>
 				<td><span class="description"><?php _e( 'Use this if you have certain user role ids in your external database to further restrict allowed logins.  If unused, leave fields blank.' ); ?></span></td>
-        </tr>
+        </tr> */ ?>
         <tr valign="top">
             <th scope="row"><label><?php _e( 'First name' ); ?></label></th>
 			<td><input type="text" name="pp_db_first_name" value="<?php echo get_site_option('pp_db_first_name'); ?>" /></td>
@@ -210,9 +216,7 @@ return $dbPassword == $password;' ); ?></td>
 }
 
 function pp_check_password_custom($code, $username, $password, $dbPassword) {
-
 	return eval($code);
-
 }
 
 //actual meat of plugin - essentially, you're setting $username and $password to pass on to the system.
@@ -221,7 +225,6 @@ function pp_check_password_custom($code, $username, $password, $dbPassword) {
 function pp_db_auth_check_login($username,$password) {
 	require_once('./wp-includes/user.php');
 	require_once('./wp-includes/pluggable.php');
-	require_once('./wp-includes/class-phpass.php');
 	
     $pp_hasher = new PasswordHash(8, FALSE);
     
