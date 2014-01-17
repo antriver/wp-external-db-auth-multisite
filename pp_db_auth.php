@@ -103,15 +103,15 @@ function pp_db_auth_display_options() {
         </tr>
         </table>
         
-        <h3><?php _e( 'External Database Source Fields' ); ?></h3>
+
         <table class="form-table">
         <tr valign="top">
-            <th scope="row"><label><?php _e( 'Username' ); ?></label></th>
+            <th scope="row"><label><?php _e( 'Username field name in external DB' ); ?></label></th>
 				<td><input type="text" name="pp_db_namefield" value="<?php echo get_site_option('pp_db_namefield'); ?>" /></td>
 				<td><span class="description"><strong style="color:red;"><?php _e( 'required' ); ?></strong></span></td>
         </tr>
         <tr valign="top">
-            <th scope="row"><label><?php _e( 'Password' ); ?></label></th>
+            <th scope="row"><label><?php _e( 'Password field name in external DB' ); ?></label></th>
 				<td><input type="text" name="pp_db_pwfield" value="<?php echo get_site_option('pp_db_pwfield'); ?>" /></td>
 				<td><span class="description"><strong style="color:red;"><?php _e( 'required' ); ?></strong></span><td>
         </tr>
@@ -160,6 +160,12 @@ return $dbPassword == $password;' ); ?></td>
 				<input type="text" name="pp_db_role_value" value="<?php echo get_site_option('pp_db_role_value'); ?>" /></td>
 				<td><span class="description"><?php _e( 'Use this if you have certain user role ids in your external database to further restrict allowed logins.  If unused, leave fields blank.' ); ?></span></td>
         </tr> */ ?>
+        </table>
+        
+        <h3><?php _e( 'External Database Source Fields' ); ?></h3>
+        <p>Enter these optional field names in the external db and the values from them will be used for the user's Wordpress account that gets created.</p>
+        
+        <table class="form-table">
         <tr valign="top">
             <th scope="row"><label><?php _e( 'First name' ); ?></label></th>
 			<td><input type="text" name="pp_db_first_name" value="<?php echo get_site_option('pp_db_first_name'); ?>" /></td>
