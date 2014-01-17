@@ -232,8 +232,6 @@ function pp_db_auth_check_login($username,$password) {
 	require_once('./wp-includes/user.php');
 	require_once('./wp-includes/pluggable.php');
 	
-    $pp_hasher = new PasswordHash(8, FALSE);
-    
     //Connect to external database
 	$db = new PDO(get_site_option('pp_db_pdo_string'));
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
